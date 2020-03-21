@@ -3,21 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/solar/bulmaswatch.min.css">
     <link rel="stylesheet" href="./styles.css" />
-    <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Market Tide</title>
 </head>
 <body>
+    <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand is-right navbar-end">
+          <a class="navbar-item is-right" href="#">The Market Tide
+            <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
+          </a>
+        </div>
+    </nav>
     <header>The Market Tide</header>
-    <h1>COVID - 19</h1>
-    <label for="search-term">Search for a City:</label>
-    <div>
-        <input type="text" id="search-location-input" aria-describedby="searchHelp">
-        <button class="mdc-button" type="button" id="search-location-button"><i class="fas fa-search"></i></button>
-        <small id="searchHelp" class="form-text text-muted text-reset">Enter a country to search</small>
-    </div>
+    <section class="section columns">
+        <div class="column is-full">
+            <div class="hero-body container has-text-centered">
+                <h1 class="title is-1">COVID - 19</h1>
+                <h2 class="subtitle">The current event changing world markets</h2>
+            </div>
+            <div class="column">
+                <div class="field is-horizontal columns">
+                    <div class="field-label column">
+                        <label class="label" for="search-term">Search for a Country:</label>
+                    </div>
+                    <div class="field-body column has-text-left">
+                        <input type="text" id="search-location-input" placeholder="e.g. Australia">
+                        <button class="mdc-button" type="button" id="search-location-button"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <h4>todays date</h5>
+            </div>
+            <div class="column level">
+                <div class="level-item">
+                    <label class="checkbox">
+                        <input class="checkbox" type="checkbox" id="stock-market">
+                        Stock Market
+                    </label>
+                </div>
+                <div class="level-item">
+                    <label class="checkbox level-item">
+                        <input class="checkbox" type="checkbox" id="currency">
+                        Currency
+                    </label>
+                </div>
+            </div>
+            <div class="column">
+                <div><h5>total infected</h5></div>
+                <div><h5>total deaths</h5></div>
+                <div><h5>total recovered</h5></div>
+            </div>
+        </div>
+    </section>
     <script src="./script.js"></script>
 </body>
 </html>
