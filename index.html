@@ -4,10 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css" />
+    <link href="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/material-components-web@v4.0.0/dist/material-components-web.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <title>Market Tide</title>
 </head>
 <body>
-    <h1>Market Tide</h1>
+    <header>The Market Tide</header>
+    <h1>COVID - 19</h1>
+    <label for="search-term">Search for a City:</label>
+    <div>
+        <input type="text" id="search-location-input" aria-describedby="searchHelp">
+        <button class="mdc-button" type="button" id="search-location-button"><i class="fas fa-search"></i></button>
+        <small id="searchHelp" class="form-text text-muted text-reset">Enter a country to search</small>
+    </div>
     <script src="./script.js"></script>
 </body>
 </html>
