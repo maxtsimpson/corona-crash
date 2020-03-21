@@ -1,0 +1,41 @@
+WHEN i load the page
+  THEN a function called GetBrowserLocation
+    gets my current geolocation using an api
+    populates the location bar with my current location
+    calls the populatePageByLocation function
+    calls the renderClock function
+
+WRITE a populatePageByLocation function that
+  calls several other functions:
+    populateEventStatisticsByLocation
+      create functions for each statistic to retrieve that will return two numbers - this location and total
+        getInfectedStats
+        getDeathStats
+        getRecoveredStats
+       create functions to render each diagram/chart (that each take two numbers as input)
+        renderInfectedStats 
+        renderDeathStats
+        renderRecoveredStats
+    
+    populateStockLossesByLocation
+      create function to retrieve top 3 shares by price drop for the day
+      create function to render line graph and append to top losses div
+    populateStockGainsByLocation
+      create function to retrieve top 3 shares by price gain for the day
+      create function to render line graph and append to top gains div
+    
+    populateCountryIndexByLocation
+      create function to retrieve what the relevent country index is for that country i.e. AUS = ASX 200, US = DowJones etc.
+      create function to render the line graph for the index and append to countryIndex div
+      
+    populateCurrencyByLocation
+      create function to retrieve the currency for the location vs the US dollar
+      render the currency as a basic statistic with percentage change
+    
+WRITE a renderClock function that
+  gets the current time
+  converts that time to a pretty string
+  renders that string in the html div with id clock
+
+
+    
