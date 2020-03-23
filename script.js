@@ -86,4 +86,85 @@ function openTab(event) {
   $("#stock-market-tab").on("click",openTab)
   $("#currency-tab").on("click",openTab)  
 
+// Here we are building the URL we need to query the database
+var queryURL = "https://api.covid19api.com/countries";
+
+// Here we run our AJAX call to the OpenWeatherMap API
+$.ajax({
+  url: queryURL,
+  method: "GET"
+})
+  // We store all of the retrieved data inside of an object called "response"
+  .then(function(response) {
+
+    // Log the queryURL
+    console.log(queryURL);
+
+    // Log the resulting object
+    console.log(response);
+
+  });
+
+  var queryParams = {};
+
+  function buildQueryURLGain() {
+      // URL we need to query the database
+      var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/gainers?";
+
+      queryParams.token = "pk_5db4c42244024da5be36585c0beb7a59";
+
+      queryParams.displayPercent = "true"; 
+
+      //console.log(queryURL + $.param(queryParams));
+      return queryURL + $.param(queryParams)
+  }
+
+  var queryURL = buildQueryURLGain();
+  
+// Here we run our AJAX call to the OpenWeatherMap API
+$.ajax({
+  url: queryURL,
+  method: "GET"
+})
+  // We store all of the retrieved data inside of an object called "response"
+  .then(function(response) {
+
+    // Log the queryURL
+    console.log(queryURL);
+
+    // Log the resulting object
+    console.log(response);
+
+  });
+
+
+  function buildQueryURLlose() {
+    // URL we need to query the database
+    var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/losers?";
+
+    queryParams.token = "pk_5db4c42244024da5be36585c0beb7a59";
+
+    queryParams.displayPercent = "true"; 
+
+    //console.log(queryURL + $.param(queryParams));
+    return queryURL + $.param(queryParams)
+}
+
+var queryURL = buildQueryURLlose();
+
+// Here we run our AJAX call to the OpenWeatherMap API
+$.ajax({
+url: queryURL,
+method: "GET"
+})
+// We store all of the retrieved data inside of an object called "response"
+.then(function(response) {
+
+  // Log the queryURL
+  console.log(queryURL);
+
+  // Log the resulting object
+  console.log(response);
+
+});
 
