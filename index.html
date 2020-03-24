@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/solar/bulmaswatch.min.css">
+    <!-- <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
     <link rel="stylesheet" href="./styles.css" />
     <title>Market Tide</title>
 </head>
 <body>
     <nav class="navbar is-fixed-top is-primary" role="navigation" aria-label="main navigation">
         <div class="navbar-brand is-right navbar-end">
-          <a class="navbar-item is-right" href="#">The Market Tide
+            <a class="navbar-item is-right" href="#">
+                <img src="./Assets/wave.png"> 
+                <p style="padding: 0 1em 0 1em;">The Market Tide</p>
+                <i class="icon fas fa-dollar-sign"></i>
             <!-- <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"> -->
-          </a>
+            </a>
         </div>
     </nav>
     <header>The Market Tide</header>
@@ -22,43 +27,61 @@
         <div class="column is-full">
             <div class="hero-body container has-text-centered">
                 <h1 class="title is-1">COVID - 19</h1>
-                <h2 class="subtitle">The current event changing world markets</h2>
+                <h2 class="title is-4">The current event changing world markets</h2>
             </div>
-            <div class="column">
-                <div class="field is-horizontal columns">
-                    <div class="field-label column">
+            <div class="column is-full">
+                <nav class="level">
+                    <div class="level-item has-text-centered">
                         <label class="label" for="search-term">Search for a Country:</label>
-                    </div>
-                    <div class="field-body column has-text-left">
                         <input type="text" id="search-location-input" placeholder="e.g. Australia">
                         <button class="mdc-button" type="button" id="search-location-button"><i class="fas fa-search"></i></button>
                     </div>
-                </div>
+                </nav>
             </div>
-            <div class="column">
-                <h4>todays date</h5>
+            <div class="column is-full">
+                <nav class="level">
+                    <div class="level-item">
+                        <p class="subtitle has-text-light" id="todays-date">todays date</p>
+                    </div>
+                    <div class="level-item">
+                        <label class="checkbox level-item has-text-light">
+                            <input class="checkbox" type="checkbox" id="stock-market-checkbox">
+                            <label class="label" for="stock-market-checkbox">Stock Market</label>
+                        </label>
+                    </div>
+                    <div class="level-item">
+                        <label class="checkbox level-item has-text-light">
+                            <input class="checkbox" type="checkbox" id="currency-checkbox">
+                            <label class="label" for="currency-checkbox">Currency</label>
+                        </label>
+                    </div>
+                </nav>
             </div>
-            <div class="column level">
-                <div class="level-item">
-                    <label class="checkbox">
-                        <input class="checkbox" type="checkbox" id="stock-market">
-                        Stock Market
-                    </label>
+            <div class="columns">
+                <div id="financial-data-div" class="column is-two-thirds columns">
+                    <div class="column is-half has-text-centered">
+                        <h2 class="title">Top stock <span class="tag is-success">gains</span></h2>
+                        <canvas id="first-gain-chart" width="400" height="400"></canvas>
+                        <canvas id="second-gain-chart" width="400" height="400"></canvas>
+                        <canvas id="third-gain-chart" width="400" height="400"></canvas>
+                    </div>
+                    <div class="column is-half has-text-centered">
+                        <h2 class="title">Top stock <span class="tag is-warning">losses</span></h2>
+                        <canvas id="first-loss-chart" width="400" height="400"></canvas>
+                        <canvas id="second-loss-chart" width="400" height="400"></canvas>
+                        <canvas id="third-loss-chart" width="400" height="400"></canvas>
+                    </div>
                 </div>
-                <div class="level-item">
-                    <label class="checkbox level-item">
-                        <input class="checkbox" type="checkbox" id="currency">
-                        Currency
-                    </label>
+                <div id="virus-data-div" class="column is-one-third">
+                    <div class="column has-text-centered">
+                        <h2 class="title">Corona Virus <i class="fas fa-biohazard"></i> Statistics</h2>
+                        <canvas id="virus-pie-chart" width="400" height="400"></canvas>
+                    </div>
                 </div>
-            </div>
-            <div class="column">
-                <div><h5>total infected</h5></div>
-                <div><h5>total deaths</h5></div>
-                <div><h5>total recovered</h5></div>
             </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
     <script src="./script.js"></script>
 </body>
 </html>
