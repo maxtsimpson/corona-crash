@@ -1,3 +1,4 @@
+
 let mapApiToVirusObject = function(ajaxResponse){
     var totalInfected = 0;
     var totalRecovered = 0;
@@ -17,8 +18,6 @@ let mapApiToVirusObject = function(ajaxResponse){
         createChart(totalStats);
 };
 
-
-
 let getVirusStatsByCountry = function(country){
     var settings = {
         "async": true,
@@ -32,11 +31,6 @@ let getVirusStatsByCountry = function(country){
     }
     $.ajax(settings).done(mapApiToVirusObject);
 }
-
-
-//console.log(response);
-
-
 
 var createChart = function(totalStats) {
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -62,3 +56,34 @@ var createChart = function(totalStats) {
     },
 });
 }
+
+const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
+const IEXClOUDKEY = "pk_52d0f60a5213467ba11ea8c961508026"
+
+
+function openTab(event) {
+
+    if ($(this).attr("id") === "stock-market-tab") {
+        console.log("clicked stock market");
+        $("#currency-data-div" ).hide();
+        $("#currency-tab").removeClass("is-active");
+        $("#financial-data-div" ).show();
+    } else if ($(this).attr("id") === "currency-tab") {
+        console.log("clicked currency");
+        $("#financial-data-div" ).hide();
+        $("#stock-market-tab").removeClass("is-active");
+        $("#currency-data-div" ).show();
+    }
+    
+    //do a remove then an add so it doesnt get doubled up
+    $(this).removeClass("is-active").addClass("is-active")
+
+
+
+    
+  }
+
+  $("#stock-market-tab").on("click",openTab)
+  $("#currency-tab").on("click",openTab)  
+
+
