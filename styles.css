@@ -6,3 +6,8 @@
     padding-left: 1em;
     padding-right: 1em;
 }
+
+button {
+    height: 100%;
+    width: auto;
+}
