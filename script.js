@@ -1,9 +1,11 @@
 const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
 const IEXClOUDKEY = "pk_52d0f60a5213467ba11ea8c961508026"
 
+var countryList = ["Australia","United States of America"]
+
 var countryToDollarMap = {
     Australia: "AUD",
-    America: "USD",
+    "United States of America": "USD"
 };
 
 let mapApiToVirusObject = function(ajaxResponse){
@@ -108,7 +110,6 @@ let mapCurrencyAjaxResponseToCurrencyObject = function(currencyAjaxResponse){
         var day = Object.keys(ajaxMonthObject)[index];
         var closePriceForToday = ajaxMonthObject[day]["4. close"]
         currencyMonthObject[day] = closePriceForToday;
-        i++
     }
 
     renderCurrencyMonthToChart(currencyMonthObject,label);
@@ -135,7 +136,50 @@ let renderCurrencyMonthToChart = function(currencyMonthObject,label){
     });
 }
 
+let populateCountryDropDown = function(){
+    countryList.forEach(country => {
+        console.log({country});
+        $("#select-country").append($("<option>").text(country).attr("id",country))
+    });
+}
+
+let populateCurrencyData = function(country){
+    var fromCurrencySymbol = countryToDollarMap[country];
+    //hardcoded for now
+    var toCurrencySymbol = "USD"
+    callCurrencyApi(fromCurrencySymbol,toCurrencySymbol);
+}
+
+let searchCountryStats = function(){
+    var selectedCountry = $("#select-country").children("option:selected").text();
+    if (selectedCountry === "Select a Country") {
+        //if they havent selected a country do nothing
+        return;
+    }
+
+    //populate the currency data
+    populateCurrencyData(selectedCountry);
+    //populate the corona virus data
+
+    //populate the stock data
+
+}
+
+let OnInit = function(){
+    $("#currency-data-div" ).hide();
+    populateCountryDropDown();
+}
+
+$("#select-country").on("change",function(){
+    
+    $(this).children().removeAttr("selected")
+    $(this).children("#" + this.value).attr("selected", true)
+
+});
+
 $("#stock-market-tab").on("click",openTab)
 $("#currency-tab").on("click",openTab)  
+$("#search-location-button").on('click',searchCountryStats)
 
+OnInit();
 

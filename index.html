@@ -29,32 +29,24 @@
             <div class="column is-full">
                 <nav class="level">
                     <div class="level-item has-text-centered">
-                        <label class="label" for="search-term">Search for a Country:</label>
-                        <input type="text" id="search-location-input" placeholder="e.g. Australia">
-                        <button class="mdc-button" type="button" id="search-location-button"><i class="fas fa-search"></i></button>
+                        <div class="field has-addons">
+                            <p class="control has-icons-left">
+                                <span class="select">
+                                <select id="select-country">
+                                    <option id="select-a-country" selected>Select a Country</option>
+                                </select>
+                                </span>
+                                <span class="icon is-small is-left">
+                                <i class="fas fa-globe"></i>
+                                </span>
+                            </p>
+                            <div class="control">
+                                <button class="mdc-button" type="button" id="search-location-button"><i class="fas fa-search"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>
-            <!-- the tabs working makes the below redundant, but left it in as a fallback. will remove before submitting
-                <div class="column is-full">
-                <nav class="level">
-                    <div class="level-item">
-                        <p class="subtitle has-text-light" id="todays-date">todays date</p>
-                    </div>
-                    <div class="level-item">
-                        <label class="checkbox level-item has-text-light">
-                            <input class="checkbox" type="checkbox" id="stock-market-checkbox">
-                            <label class="label" for="stock-market-checkbox">Stock Market</label>
-                        </label>
-                    </div>
-                    <div class="level-item">
-                        <label class="checkbox level-item has-text-light">
-                            <input class="checkbox" type="checkbox" id="currency-checkbox">
-                            <label class="label" for="currency-checkbox">Currency</label>
-                        </label>
-                    </div>
-                </nav>
-            </div> -->
             <nav class="tabs is-boxed is-fullwidth is-large">
                 <div class="container">
                     <ul>
