@@ -58,7 +58,7 @@ var createChart = function (totalStats) {
 
 const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
 const IEXClOUDKEY = "pk_52d0f60a5213467ba11ea8c961508026"
-
+const ALTIEXCLOUDKEY = "pk_c314d3eadf7b46149d92dde9913bb352";
 
 function openTab(event) {
 
@@ -85,223 +85,271 @@ $("#currency-tab").on("click", openTab)
 
 
 
-$(document).ready(function () {
+// $(document).ready(function () {
 
-  // Corona Virus APi
-  var queryURL = "https://api.covid19api.com/countries";
+//   // Corona Virus APi
+//   var queryURL = "https://api.covid19api.com/countries";
 
-  $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
+//   $.ajax({
+//       url: queryURL,
+//       method: "GET"
+//     })
 
-    .then(function (response) {
-      //console.log(queryURL);
-      //console.log(response);
+//     .then(function (response) {
+//       //console.log(queryURL);
+//       //console.log(response);
+//     });
+
+
+
+
+//   // BUILD GAIN
+
+
+
+//   $.ajax({
+//       url: queryURL,
+//       method: "GET"
+//     })
+//     .then(function (response) {
+//       //console.log(queryURL);
+//       //console.log(response);
+
+//       var gains = [];
+
+//       for (var i = 0; i <= 3; i++) {
+//         gains.push(response[i].symbol);
+      
+//         if (gains.length > 3) {
+//           gains.length = 3;
+//         }
+//         localStorage.setItem('gains', JSON.stringify(gains));
+//        //var previousInput = JSON.parse(window.localStorage.getItem('gains'));
+
+//       }
+
+//   // Gains1 history     
+//       gainURL1 = "https://cloud.iexapis.com/stable/stock/" + gains[0] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
+
+// $.ajax({
+//     url: gainURL1,
+//     method: "GET"
+//   })
+//   .then(function (response) {
+//     //console.log(queryURL);
+//     //console.log(response);
+
+//     for (var i = 0; i <= (response).length; i++) {
+//       var dataGain1 = JSON.parse(localStorage.getItem('dataGain1')) || [];
+//       dataGain1.push(response[i].close);
+//       localStorage.setItem('dataGain1', JSON.stringify(dataGain1));
+//     }
+// });
+
+// // Gain2 history
+
+//   var gainURL2 = "https://cloud.iexapis.com/stable/stock/" + gains[1] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
+
+
+// $.ajax({
+//     url: gainURL2,
+//     method: "GET"
+//   })
+//   .then(function (response) {
+//     //console.log(queryURL);
+//     //console.log(response);
+
+//     var dataGain2 = [];
+
+//     for (var i = 0; i <= (response).length; i++) {
+//       dataGain2.push(response[i].close);
+
+//       localStorage.setItem('dataGain2', JSON.stringify(dataGain2));
+//     }
+// });
+
+
+// // Gain3 history
+
+//   var gainURL3 = "https://cloud.iexapis.com/stable/stock/" + gains[2] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
+
+
+// $.ajax({
+//     url: gainURL3,
+//     method: "GET"
+//   })
+//   .then(function (response) {
+//     //console.log(queryURL);
+//     //console.log(response);
+
+//     var dataGain3 = [];
+
+//     for (var i = 0; i <= (response).length; i++) {
+//       dataGain3.push(response[i].close);
+
+//       localStorage.setItem('dataGain3', JSON.stringify(dataGain3));
+//     }
+// });
+
+// });
+
+
+// // BUILD LOSES
+
+//   function buildLose() {
+//     var queryParams = {};
+
+//     var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/losers?";
+//     queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
+//     queryParams.displayPercent = "true";
+//     return queryURL + $.param(queryParams)
+//   }
+//   var queryURL = buildLose();
+
+//   $.ajax({
+//       url: queryURL,
+//       method: "GET"
+//     })
+//     .then(function (response) {
+//      //console.log(queryURL);
+//       //console.log(response);
+
+//       var loses = [];
+
+//       for (var i = 0; i <= 3; i++) {
+//         loses.push(response[i].symbol);
+
+//         if (loses.length > 3) {
+//           loses.length = 3;
+//         }
+//         localStorage.setItem('loses', JSON.stringify(loses));
+//         //var previousInput = JSON.parse(window.localStorage.getItem('loses'));
+//       }
+//       //console.log(previousInput);
+
+
+// // Lose1 History
+// var losesURL1 = "https://cloud.iexapis.com/stable/stock/" + loses[0] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
+
+// $.ajax({
+//     url: losesURL1,
+//     method: "GET"
+//   })
+//   .then(function (response) {
+//     //console.log(queryURL);
+//     //console.log(response);
+
+//     var dataLose1 = [];
+
+//     for (var i = 0; i <= (response).length; i++) {
+//       dataLose1.push(response[i].close);
+
+//       localStorage.setItem('dataLose1', JSON.stringify(dataLose1));
+//     }
+// });
+
+
+// // Lose2 History
+
+//   var losesURL2 = "https://cloud.iexapis.com/stable/stock/" + loses[1] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
+
+// $.ajax({
+//     url: losesURL2,
+//     method: "GET"
+//   })
+//   .then(function (response) {
+//     //console.log(queryURL);
+//     //console.log(response);
+
+//     var dataLose2 = [];
+
+//     for (var i = 0; i <= (response).length; i++) {
+//       dataLose2.push(response[i].close);
+
+//       localStorage.setItem('dataLose2', JSON.stringify(dataLose2));
+//     }
+// });
+
+
+// // Lose3 History
+
+// var losesURL3 = "https://cloud.iexapis.com/stable/stock/" + loses[2] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
+
+// $.ajax({
+//     url: losesURL3,
+//     method: "GET"
+//   })
+//   .then(function (response) {
+//     //console.log(queryURL);
+//     //console.log(response);
+
+//     var dataLose3 = [];
+
+//     for (var i = 0; i <= (response).length; i++) {
+//       dataLose3.push(response[i].close);
+
+//       localStorage.setItem('dataLose3', JSON.stringify(dataLose3));
+//     }
+// });
+  
+// });
+
+// });
+var currentAjaxResponse;
+let mapGainersAjaxResponseToGainArray = function(gainersAjaxResponse){
+    console.log({gainersAjaxResponse});
+    currentAjaxResponse = gainersAjaxResponse;
+    var gainArray = [];
+    for (let index = 0; index = 3; index++) {
+        gainArray.push(gainersAjaxResponse[index].symbol);
+    }
+    console.log({gainArray});
+
+    getStockChart(gainArray[0]);
+
+    // gainArray.forEach(stock => {
+    //     getStockChart(stock);
+    // });
+}
+
+let mapStockChartToChartObject = function(stockChartAjaxResponse) {
+
+    console.log({stockChartAjaxResponse});
+    
+    //define a local object to store the dates and prices
+    var stockChartObject= {};
+
+    stockChartAjaxResponse.forEach(day => {
+        stockChartObject[day.date] = day.close;
     });
 
+    console.log({stockChartObject});
+    
+}
 
-
-
-  // BUILD GAIN
-
-  function buildGain() {
+let buildGainURL = function() {
     var queryParams = {};
     var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/gainers?";
-    queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
+    // queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
+    queryParams.token = ALTIEXCLOUDKEY;
     queryParams.displayPercent = "true";
     return queryURL + $.param(queryParams)
-  }
-  var queryURL = buildGain();
+}
 
+var url = buildGainURL();
 
-  $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
-    .then(function (response) {
-      //console.log(queryURL);
-      //console.log(response);
+let getTopGainersFromAjax = function() {
+    $.ajax({
+        url: url,
+        method: "GET"
+      }).then(mapGainersAjaxResponseToGainArray);
+}
 
-      var gains = [];
-
-      for (var i = 0; i <= 3; i++) {
-        gains.push(response[i].symbol);
-      
-        if (gains.length > 3) {
-          gains.length = 3;
-        }
-        localStorage.setItem('gains', JSON.stringify(gains));
-       //var previousInput = JSON.parse(window.localStorage.getItem('gains'));
-
-      }
-
-  // Gains1 history     
-      gainURL1 = "https://cloud.iexapis.com/stable/stock/" + gains[0] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
-
-$.ajax({
-    url: gainURL1,
-    method: "GET"
-  })
-  .then(function (response) {
-    //console.log(queryURL);
-    //console.log(response);
-
-    for (var i = 0; i <= (response).length; i++) {
-      var dataGain1 = JSON.parse(localStorage.getItem('dataGain1')) || [];
-      dataGain1.push(response[i].close);
-      localStorage.setItem('dataGain1', JSON.stringify(dataGain1));
-    }
-});
-
-// Gain2 history
-
-  var gainURL2 = "https://cloud.iexapis.com/stable/stock/" + gains[1] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
-
-
-$.ajax({
-    url: gainURL2,
-    method: "GET"
-  })
-  .then(function (response) {
-    //console.log(queryURL);
-    //console.log(response);
-
-    var dataGain2 = [];
-
-    for (var i = 0; i <= (response).length; i++) {
-      dataGain2.push(response[i].close);
-
-      localStorage.setItem('dataGain2', JSON.stringify(dataGain2));
-    }
-});
-
-
-// Gain3 history
-
-  var gainURL3 = "https://cloud.iexapis.com/stable/stock/" + gains[2] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
-
-
-$.ajax({
-    url: gainURL3,
-    method: "GET"
-  })
-  .then(function (response) {
-    //console.log(queryURL);
-    //console.log(response);
-
-    var dataGain3 = [];
-
-    for (var i = 0; i <= (response).length; i++) {
-      dataGain3.push(response[i].close);
-
-      localStorage.setItem('dataGain3', JSON.stringify(dataGain3));
-    }
-});
-
-});
-
-
-// BUILD LOSES
-
-  function buildLose() {
-    var queryParams = {};
-
-    var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/losers?";
-    queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
-    queryParams.displayPercent = "true";
-    return queryURL + $.param(queryParams)
-  }
-  var queryURL = buildLose();
-
-  $.ajax({
-      url: queryURL,
-      method: "GET"
-    })
-    .then(function (response) {
-     //console.log(queryURL);
-      //console.log(response);
-
-      var loses = [];
-
-      for (var i = 0; i <= 3; i++) {
-        loses.push(response[i].symbol);
-
-        if (loses.length > 3) {
-          loses.length = 3;
-        }
-        localStorage.setItem('loses', JSON.stringify(loses));
-        //var previousInput = JSON.parse(window.localStorage.getItem('loses'));
-      }
-      //console.log(previousInput);
-
-
-// Lose1 History
-
-var losesURL1 = "https://cloud.iexapis.com/stable/stock/" + loses[0] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
-
-$.ajax({
-    url: losesURL1,
-    method: "GET"
-  })
-  .then(function (response) {
-    //console.log(queryURL);
-    //console.log(response);
-
-    var dataLose1 = [];
-
-    for (var i = 0; i <= (response).length; i++) {
-      dataLose1.push(response[i].close);
-
-      localStorage.setItem('dataLose1', JSON.stringify(dataLose1));
-    }
-});
-
-
-// Lose2 History
-
-  var losesURL2 = "https://cloud.iexapis.com/stable/stock/" + loses[1] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
-
-$.ajax({
-    url: losesURL2,
-    method: "GET"
-  })
-  .then(function (response) {
-    //console.log(queryURL);
-    //console.log(response);
-
-    var dataLose2 = [];
-
-    for (var i = 0; i <= (response).length; i++) {
-      dataLose2.push(response[i].close);
-
-      localStorage.setItem('dataLose2', JSON.stringify(dataLose2));
-    }
-});
-
-
-// Lose3 History
-
-var losesURL3 = "https://cloud.iexapis.com/stable/stock/" + loses[2] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
-
-$.ajax({
-    url: losesURL3,
-    method: "GET"
-  })
-  .then(function (response) {
-    //console.log(queryURL);
-    //console.log(response);
-
-    var dataLose3 = [];
-
-    for (var i = 0; i <= (response).length; i++) {
-      dataLose3.push(response[i].close);
-
-      localStorage.setItem('dataLose3', JSON.stringify(dataLose3));
-    }
-});
-  
-});
-
-});
-
+let getStockChart = function(stockSymbol) {
+    var queryURL = "https://cloud.iexapis.com/stable/stock/" + stockSymbol + "/chart?"
+    + "&token=" + ALTIEXCLOUDKEY;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(mapStockChartToChartObject);
+}
