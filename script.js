@@ -93,8 +93,9 @@ let getStockChart = function(stockSymbol) {
     }).then(mapStockChartToChartObject);
 }
 
+
+
 let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
-    
     var stockGainArray = [];
 
     for (var index = 0; index < 3; index++) {
@@ -107,6 +108,7 @@ let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
         getStockChart(stock);
     });
 }
+
 
 let openTab = function(event) {
 
@@ -242,3 +244,41 @@ let getTopGainersFromAjax = function() {
         method: "GET"
       }).then(mapGainersAjaxResponseToStockGainArray);
 }
+
+
+let buildLoseURL = function() {
+  var queryParams = {};
+  var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/losers?";
+  // queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
+  queryParams.token = ALTIEXCLOUDKEY;
+  queryParams.displayPercent = "true";
+  return queryURL + $.param(queryParams)
+}
+
+var url = buildLoseURL();
+
+let getTopLosersFromAjax = function() {
+    $.ajax({
+        url: url,
+        method: "GET"
+      }).then(mapLosersAjaxResponseToStockloserArray);
+}
+
+
+let mapLosersAjaxResponseToStockloserArray = function(losersAjaxResponse){
+  console.log({losersAjaxResponse});
+  currentRepsonse = losersAjaxResponse;
+  
+  console.log(stockLoseArray);
+  for (var index = 0; index < 3; index++) {
+      var symbol = losersAjaxResponse[index].symbol
+      stockLoseArray.push(symbol);
+  }
+  console.log({stockLoseArray});
+  
+  stockLoseArray.forEach(stock => {
+      getStockChart(stock);
+  });
+}
+
+
