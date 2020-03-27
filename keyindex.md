@@ -1,16 +1,22 @@
 ### API keys for Corona Crash
 
-## FinnHub Key
-bpqpfffrh5r8s3uv2s00
-
-Personal use only
-60 free API calls/minute
-Websocket: 50 symbols
-Access most data
-
 ## COVID 19 
 
 Open source, no key
 
-https://rapidapi.com/KishCom/api/covid-19-coronavirus-statistics?endpoint=apiendpoint_53587227-476d-4279-8f1d-4884e60d1db7
+https://api.covid19api.com/
+
+## IEXAPIS  stock exchange
+
+# Gain
+"https://cloud.iexapis.com/stable/stock/market/list/gainers?"; 
+
+# Loses
+"https://cloud.iexapis.com/stable/stock/market/list/losers?";
+
+# Market history
+"https://sandbox.iexapis.com/stable/stock/"+ Symbol name + "/chart?"
+
+token = "pk_5db4c42244024da5be36585c0beb7a59";
+
 
