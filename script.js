@@ -81,8 +81,8 @@ let mapStockChartToChartObject = function(stockChartAjaxResponse) {
 
     //now you have a stockChartObject that you can use to load the chart. the console log below shows the format of it
     console.log({stockChartObject});
-    
 }
+
 
 let getStockChart = function(stockSymbol) {
     var queryURL = "https://cloud.iexapis.com/stable/stock/" + stockSymbol + "/chart?"
@@ -94,8 +94,9 @@ let getStockChart = function(stockSymbol) {
 }
 
 
-
 let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
+    console.log({gainersAjaxResponse});
+    
     var stockGainArray = [];
 
     for (var index = 0; index < 3; index++) {
@@ -264,21 +265,17 @@ let getTopLosersFromAjax = function() {
       }).then(mapLosersAjaxResponseToStockloserArray);
 }
 
-
 let mapLosersAjaxResponseToStockloserArray = function(losersAjaxResponse){
   console.log({losersAjaxResponse});
-  currentRepsonse = losersAjaxResponse;
-  
-  console.log(stockLoseArray);
+  var stockLoseArray = [];
+
   for (var index = 0; index < 3; index++) {
       var symbol = losersAjaxResponse[index].symbol
       stockLoseArray.push(symbol);
   }
   console.log({stockLoseArray});
-  
+
   stockLoseArray.forEach(stock => {
       getStockChart(stock);
   });
 }
-
-
