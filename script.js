@@ -57,7 +57,8 @@ var createChart = function (totalStats) {
 }
 
 const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
-const IEXClOUDKEY = "pk_52d0f60a5213467ba11ea8c961508026"
+// jaybshinsen@gmail.com key
+const IEXClOUDKEY = "pk_6ccbe9aa36734e5fb754442deb8b4b1d "
 
 
 function openTab(event) {
@@ -108,7 +109,7 @@ $(document).ready(function () {
   function buildGain() {
     var queryParams = {};
     var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/gainers?";
-    queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
+    queryParams.token = "pk_6ccbe9aa36734e5fb754442deb8b4b1d";
     queryParams.displayPercent = "true";
     return queryURL + $.param(queryParams)
   }
@@ -137,7 +138,7 @@ $(document).ready(function () {
       }
 
   // Gains1 history     
-      gainURL1 = "https://cloud.iexapis.com/stable/stock/" + gains[0] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
+      gainURL1 = "https://cloud.iexapis.com/stable/stock/" + gains[0] + "/chart?&token=pk_6ccbe9aa36734e5fb754442deb8b4b1d";
 
 $.ajax({
     url: gainURL1,
@@ -156,7 +157,7 @@ $.ajax({
 
 // Gain2 history
 
-  var gainURL2 = "https://cloud.iexapis.com/stable/stock/" + gains[1] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
+  var gainURL2 = "https://cloud.iexapis.com/stable/stock/" + gains[1] + "/chart?&token=pk_6ccbe9aa36734e5fb754442deb8b4b1d";
 
 
 $.ajax({
@@ -179,7 +180,7 @@ $.ajax({
 
 // Gain3 history
 
-  var gainURL3 = "https://cloud.iexapis.com/stable/stock/" + gains[2] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026";
+  var gainURL3 = "https://cloud.iexapis.com/stable/stock/" + gains[2] + "/chart?&token=pk_6ccbe9aa36734e5fb754442deb8b4b1d";
 
 
 $.ajax({
@@ -208,7 +209,7 @@ $.ajax({
     var queryParams = {};
 
     var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/losers?";
-    queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
+    queryParams.token = "pk_6ccbe9aa36734e5fb754442deb8b4b1d";
     queryParams.displayPercent = "true";
     return queryURL + $.param(queryParams)
   }
@@ -235,10 +236,9 @@ $.ajax({
       }
       //console.log(previousInput);
 
-
 // Lose1 History
 
-var losesURL1 = "https://cloud.iexapis.com/stable/stock/" + loses[0] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
+var losesURL1 = "https://cloud.iexapis.com/stable/stock/" + loses[0] + "/chart?&token=pk_6ccbe9aa36734e5fb754442deb8b4b1d"
 
 $.ajax({
     url: losesURL1,
@@ -260,7 +260,7 @@ $.ajax({
 
 // Lose2 History
 
-  var losesURL2 = "https://cloud.iexapis.com/stable/stock/" + loses[1] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
+  var losesURL2 = "https://cloud.iexapis.com/stable/stock/" + loses[1] + "/chart?&token=pk_6ccbe9aa36734e5fb754442deb8b4b1d"
 
 $.ajax({
     url: losesURL2,
@@ -282,7 +282,7 @@ $.ajax({
 
 // Lose3 History
 
-var losesURL3 = "https://cloud.iexapis.com/stable/stock/" + loses[2] + "/chart?&token=pk_52d0f60a5213467ba11ea8c961508026"
+var losesURL3 = "https://cloud.iexapis.com/stable/stock/" + loses[2] + "/chart?&token=pk_6ccbe9aa36734e5fb754442deb8b4b1d"
 
 $.ajax({
     url: losesURL3,
@@ -300,8 +300,11 @@ $.ajax({
       localStorage.setItem('dataLose3', JSON.stringify(dataLose3));
     }
 });
+
   
 });
 
 });
+
+
 
