@@ -73,32 +73,6 @@ var createChart = function (totalStats) {
 // jaybshinsen@gmail.com key
 //const IEXClOUDKEY = "pk_6ccbe9aa36734e5fb754442deb8b4b1d"
 
-
-function openTab(event) {
-
-  if ($(this).attr("id") === "stock-market-tab") {
-    console.log("clicked stock market");
-    $("#currency-data-div").hide();
-    $("#currency-tab").removeClass("is-active");
-    $("#financial-data-div").show();
-  } else if ($(this).attr("id") === "currency-tab") {
-    console.log("clicked currency");
-    $("#financial-data-div").hide();
-    $("#stock-market-tab").removeClass("is-active");
-    $("#currency-data-div").show();
-  }
-
-  //do a remove then an add so it doesnt get doubled up
-  $(this).removeClass("is-active").addClass("is-active")
-
-}
-
-$("#stock-market-tab").on("click", openTab)
-$("#currency-tab").on("click", openTab)
-
-
-
-
 // // $(document).ready(function () {
 
 // //   // Corona Virus APi
@@ -347,26 +321,6 @@ let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
         getStockChart(stock);
     });
 }
-//=======
-//        labels: Object.keys(totalStats),
-//        datasets: [{
-//            label: 'Covid 19 Stats',
-//            data: Object.values(totalStats),
-//            backgroundColor: [
-//                'rgba(255, 99, 132, 0.2)',
-//                'rgba(54, 162, 235, 0.2)',
-//                'rgba(255, 206, 86, 0.2)',
-//            ],
-//            borderColor: [
-//                'rgba(255, 99, 132, 1)',
-//                'rgba(54, 162, 235, 1)',
-//                'rgba(255, 206, 86, 1)',
-//            ],
-//            borderWidth: 1
-//            }]
-//       },
-//    });
-//}
 
 let openTab = function(event) {
 
