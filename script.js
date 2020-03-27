@@ -295,22 +295,6 @@ $("#currency-tab").on("click", openTab)
 // });
 
 // });
-var currentAjaxResponse;
-let mapGainersAjaxResponseToGainArray = function(gainersAjaxResponse){
-    console.log({gainersAjaxResponse});
-    currentAjaxResponse = gainersAjaxResponse;
-    var gainArray = [];
-    for (let index = 0; index = 3; index++) {
-        gainArray.push(gainersAjaxResponse[index].symbol);
-    }
-    console.log({gainArray});
-
-    getStockChart(gainArray[0]);
-
-    // gainArray.forEach(stock => {
-    //     getStockChart(stock);
-    // });
-}
 
 let mapStockChartToChartObject = function(stockChartAjaxResponse) {
 
@@ -323,9 +307,36 @@ let mapStockChartToChartObject = function(stockChartAjaxResponse) {
         stockChartObject[day.date] = day.close;
     });
 
+    //now you have a stockChartObject that you can use to load the chart. the console log below shows the format of it
     console.log({stockChartObject});
     
 }
+
+let getStockChart = function(stockSymbol) {
+    var queryURL = "https://cloud.iexapis.com/stable/stock/" + stockSymbol + "/chart?"
+    + "&token=" + ALTIEXCLOUDKEY;
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(mapStockChartToChartObject);
+}
+
+let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
+    
+    var stockGainArray = [];
+
+    for (var index = 0; index < 3; index++) {
+        var symbol = gainersAjaxResponse[index].symbol
+        stockGainArray.push(symbol);
+    }
+    console.log({stockGainArray});
+
+    stockGainArray.forEach(stock => {
+        getStockChart(stock);
+    });
+}
+
+
 
 let buildGainURL = function() {
     var queryParams = {};
@@ -342,14 +353,5 @@ let getTopGainersFromAjax = function() {
     $.ajax({
         url: url,
         method: "GET"
-      }).then(mapGainersAjaxResponseToGainArray);
-}
-
-let getStockChart = function(stockSymbol) {
-    var queryURL = "https://cloud.iexapis.com/stable/stock/" + stockSymbol + "/chart?"
-    + "&token=" + ALTIEXCLOUDKEY;
-    $.ajax({
-        url: queryURL,
-        method: "GET"
-    }).then(mapStockChartToChartObject);
+      }).then(mapGainersAjaxResponseToStockGainArray);
 }
