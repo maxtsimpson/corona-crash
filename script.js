@@ -1,3 +1,14 @@
+const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
+const IEXClOUDKEY = "pk_52d0f60a5213467ba11ea8c961508026"
+const ALTIEXCLOUDKEY = "pk_c314d3eadf7b46149d92dde9913bb352";
+
+var countryList = ["Australia","United States of America"]
+
+var countryToDollarMap = {
+    Australia: "AUD",
+    "United States of America": "USD"
+};
+
 let mapApiToVirusObject = function (ajaxResponse) {
   var totalInfected = 0;
   var totalRecovered = 0;
@@ -56,11 +67,11 @@ var createChart = function (totalStats) {
   });
 }
 
-const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
+//const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
 // const IEXClOUDKEY = "pk_52d0f60a5213467ba11ea8c961508026"
-const ALTIEXCLOUDKEY = "pk_c314d3eadf7b46149d92dde9913bb352";
+//const ALTIEXCLOUDKEY = "pk_c314d3eadf7b46149d92dde9913bb352";
 // jaybshinsen@gmail.com key
-const IEXClOUDKEY = "pk_6ccbe9aa36734e5fb754442deb8b4b1d"
+//const IEXClOUDKEY = "pk_6ccbe9aa36734e5fb754442deb8b4b1d"
 
 
 function openTab(event) {
@@ -336,8 +347,143 @@ let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
         getStockChart(stock);
     });
 }
+//=======
+//        labels: Object.keys(totalStats),
+//        datasets: [{
+//            label: 'Covid 19 Stats',
+//            data: Object.values(totalStats),
+//            backgroundColor: [
+//                'rgba(255, 99, 132, 0.2)',
+//                'rgba(54, 162, 235, 0.2)',
+//                'rgba(255, 206, 86, 0.2)',
+//            ],
+//            borderColor: [
+//                'rgba(255, 99, 132, 1)',
+//                'rgba(54, 162, 235, 1)',
+//                'rgba(255, 206, 86, 1)',
+//            ],
+//            borderWidth: 1
+//            }]
+//       },
+//    });
+//}
 
+let openTab = function(event) {
 
+    if ($(this).attr("id") === "stock-market-tab") {
+        $("#currency-data-div" ).hide();
+        $("#currency-tab").removeClass("is-active");
+        $("#financial-data-div" ).show();
+    } else if ($(this).attr("id") === "currency-tab") {
+        $("#financial-data-div" ).hide();
+        $("#stock-market-tab").removeClass("is-active");
+        $("#currency-data-div" ).show();
+    }
+    
+    //do a remove then an add so it doesnt get doubled up
+    $(this).removeClass("is-active").addClass("is-active")
+    
+}
+
+let callCurrencyApi = function(fromCurrencySymbol,toCurrencySymbol){
+    //use alpha vantage for this to reduce the load on iex cloud so we dont run out of calls
+    var queryURL = "https://www.alphavantage.co/query?function=FX_DAILY" + 
+    "&from_symbol=" + fromCurrencySymbol +
+    "&to_symbol=" + toCurrencySymbol +
+    "&apikey=" + ALPHAVANTAGEKEY +
+    "&datatype=json" //it's json by default but just to be safe
+
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+        })
+        .then(mapCurrencyAjaxResponseToCurrencyObject,null);
+
+}
+
+let mapCurrencyAjaxResponseToCurrencyObject = function(currencyAjaxResponse){
+    //map the ajax response to an object that has the two basic properties we want for the chart
+    var currencyMonthObject = {};
+    var ajaxMonthObject = (currencyAjaxResponse["Time Series FX (Daily)"]);
+    var label = currencyAjaxResponse["Meta Data"]["2. From Symbol"] + " to " + currencyAjaxResponse["Meta Data"]["3. To Symbol"]
+
+    //we want the for loop to countdown from 30 to 0 so it's ordered oldest first to newest last
+    for (let index = 29; index > -1; index--) {
+        var day = Object.keys(ajaxMonthObject)[index];
+        var closePriceForToday = ajaxMonthObject[day]["4. close"]
+        currencyMonthObject[day] = closePriceForToday;
+    }
+
+    renderCurrencyMonthToChart(currencyMonthObject,label);
+}
+
+let renderCurrencyMonthToChart = function(currencyMonthObject,label){
+    var ctx = document.getElementById('currency-graph').getContext('2d');
+    var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: Object.keys(currencyMonthObject),
+        datasets: [{
+            label: label,
+            data: Object.values(currencyMonthObject),
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+            ],
+            borderWidth: 1
+            }]
+        },
+    });
+}
+
+let populateCountryDropDown = function(){
+    countryList.forEach(country => {
+        console.log({country});
+        $("#select-country").append($("<option>").text(country).attr("id",country))
+    });
+}
+
+let populateCurrencyData = function(country){
+    var fromCurrencySymbol = countryToDollarMap[country];
+    //hardcoded for now
+    var toCurrencySymbol = "USD"
+    callCurrencyApi(fromCurrencySymbol,toCurrencySymbol);
+}
+
+let searchCountryStats = function(){
+    var selectedCountry = $("#select-country").children("option:selected").text();
+    if (selectedCountry === "Select a Country") {
+        //if they havent selected a country do nothing
+        return;
+    }
+
+    //populate the currency data
+    populateCurrencyData(selectedCountry);
+    //populate the corona virus data
+
+    //populate the stock data
+
+}
+
+let OnInit = function(){
+    $("#currency-data-div" ).hide();
+    populateCountryDropDown();
+}
+
+$("#select-country").on("change",function(){
+    
+    $(this).children().removeAttr("selected")
+    $(this).children("#" + this.value).attr("selected", true)
+
+});
+
+$("#stock-market-tab").on("click",openTab)
+$("#currency-tab").on("click",openTab)  
+$("#search-location-button").on('click',searchCountryStats)
+
+OnInit();
 
 let buildGainURL = function() {
     var queryParams = {};
