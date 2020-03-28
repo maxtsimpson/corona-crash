@@ -81,8 +81,8 @@ let mapStockChartToChartObject = function(stockChartAjaxResponse) {
 
     //now you have a stockChartObject that you can use to load the chart. the console log below shows the format of it
     console.log({stockChartObject});
-    
 }
+
 
 let getStockChart = function(stockSymbol) {
     var queryURL = "https://cloud.iexapis.com/stable/stock/" + stockSymbol + "/chart?"
@@ -93,7 +93,9 @@ let getStockChart = function(stockSymbol) {
     }).then(mapStockChartToChartObject);
 }
 
+
 let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
+    console.log({gainersAjaxResponse});
     
     var stockGainArray = [];
 
@@ -107,6 +109,7 @@ let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
         getStockChart(stock);
     });
 }
+
 
 let openTab = function(event) {
 
@@ -241,4 +244,38 @@ let getTopGainersFromAjax = function() {
         url: url,
         method: "GET"
       }).then(mapGainersAjaxResponseToStockGainArray);
+}
+
+
+let buildLoseURL = function() {
+  var queryParams = {};
+  var queryURL = "https://cloud.iexapis.com/stable/stock/market/list/losers?";
+  // queryParams.token = "pk_52d0f60a5213467ba11ea8c961508026";
+  queryParams.token = ALTIEXCLOUDKEY;
+  queryParams.displayPercent = "true";
+  return queryURL + $.param(queryParams)
+}
+
+var url = buildLoseURL();
+
+let getTopLosersFromAjax = function() {
+    $.ajax({
+        url: url,
+        method: "GET"
+      }).then(mapLosersAjaxResponseToStockloserArray);
+}
+
+let mapLosersAjaxResponseToStockloserArray = function(losersAjaxResponse){
+  console.log({losersAjaxResponse});
+  var stockLoseArray = [];
+
+  for (var index = 0; index < 3; index++) {
+      var symbol = losersAjaxResponse[index].symbol
+      stockLoseArray.push(symbol);
+  }
+  console.log({stockLoseArray});
+
+  stockLoseArray.forEach(stock => {
+      getStockChart(stock);
+  });
 }
