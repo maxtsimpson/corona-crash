@@ -1,3 +1,7 @@
+.hide {
+    display: none;
+}
+
 .column{
     padding: 2em;
 }
@@ -10,4 +14,32 @@
 button {
     height: 100%;
     width: auto;
+}
+
+#infected,
+#deaths,
+#recovered {
+    font-weight: normal;
+}
+#virus-stats {
+    font-size: 1.5vw;
+    font-weight: bold;
+    text-align: start;
+    padding-left: 10px;
+}
+#virus-pie-chart {
+    width: 10vh;
+    height: 10vh;
+}
+
+#infected {
+    color: rgba(255, 99, 132, 1);
+}
+
+#recovered {
+    color: rgba(54, 162, 235, 1);
+}
+
+#deaths {
+    color: rgba(255, 206, 86, 1);
 }
