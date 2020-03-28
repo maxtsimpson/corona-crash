@@ -20,11 +20,13 @@ let mapApiToVirusObject = function(ajaxResponse){
         });
 
         var totalStats = {
-            infected: totalInfected,
-            recovered: totalRecovered,
-            deaths: totalDeaths
+            Infected: totalInfected,
+            Recovered: totalRecovered,
+            Deaths: totalDeaths
         }
         createVirusPieChart(totalStats);
+        createVirusStats(totalStats);
+        $("#virus-stats").removeClass("hide");
 };
 
 let getVirusStatsByCountry = function (country) {
@@ -39,11 +41,17 @@ let getVirusStatsByCountry = function (country) {
     }
   }
   $.ajax(settings).done(mapApiToVirusObject);
-}
+};
 
+
+var virusChart;
 var createVirusPieChart = function(totalStats) {
-    var ctx = document.getElementById("virus-pie-chart").getContext("2d");
-    var myChart = new Chart(ctx, {
+  if (typeof(virusChart) === "object") {
+    //if virusChart has been defined, which should only be true if it's already been rendered. otherwise it will be "undefined"
+    virusChart.destroy()
+  }  
+  var ctx = document.getElementById("virus-pie-chart").getContext("2d");
+    virusChart = new Chart(ctx, {
     type: "pie",
     data: {
         labels: Object.keys(totalStats),
@@ -65,6 +73,14 @@ var createVirusPieChart = function(totalStats) {
     },
   });
 }
+
+var createVirusStats = function(totalStats){
+    $("#infected").text(totalStats.Infected);
+    $("#recovered").text(totalStats.Recovered);
+    $("#deaths").text(totalStats.Deaths);
+}
+
+
 
 
 let mapStockChartToChartObject = function(stockChartAjaxResponse) {
@@ -177,8 +193,7 @@ let openTab = function(event) {
         $("#financial-data-div" ).hide();
         $("#stock-market-tab").removeClass("is-active");
         $("#currency-data-div" ).show();
-    }
-    
+    }  
     //do a remove then an add so it doesnt get doubled up
     $(this).removeClass("is-active").addClass("is-active")
     
