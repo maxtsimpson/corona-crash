@@ -9,23 +9,22 @@ var countryToDollarMap = {
     "United States of America": "USD"
 };
 
-let mapApiToVirusObject = function (ajaxResponse) {
-  var totalInfected = 0;
-  var totalRecovered = 0;
-  var totalDeaths = 0;
-  ajaxResponse.data.covid19Stats.forEach(location => {
-    totalInfected += location.confirmed;
-    totalRecovered += location.recovered;
-    totalDeaths += location.deaths;
-  });
+let mapApiToVirusObject = function(ajaxResponse){
+    var totalInfected = 0;
+    var totalRecovered = 0;
+    var totalDeaths = 0;
+        ajaxResponse.data.covid19Stats.forEach(location => {
+            totalInfected += location.confirmed;
+            totalRecovered += location.recovered;
+            totalDeaths += location.deaths;
+        });
 
-  var totalStats = {
-    infected: totalInfected,
-    recovered: totalRecovered,
-    deaths: totalDeaths
-  }
-
-  createChart(totalStats);
+        var totalStats = {
+            infected: totalInfected,
+            recovered: totalRecovered,
+            deaths: totalDeaths
+        }
+        createVirusPieChart(totalStats);
 };
 
 let getVirusStatsByCountry = function (country) {
@@ -42,27 +41,27 @@ let getVirusStatsByCountry = function (country) {
   $.ajax(settings).done(mapApiToVirusObject);
 }
 
-var createChart = function (totalStats) {
-  var ctx = document.getElementById('myChart').getContext('2d');
-  var myChart = new Chart(ctx, {
-    type: 'pie',
+var createVirusPieChart = function(totalStats) {
+    var ctx = document.getElementById("virus-pie-chart").getContext("2d");
+    var myChart = new Chart(ctx, {
+    type: "pie",
     data: {
-      labels: Object.keys(totalStats),
-      datasets: [{
-        label: 'Covid 19 Stats',
-        data: Object.values(totalStats),
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-        ],
-        borderWidth: 1
-      }]
+        labels: Object.keys(totalStats),
+        datasets: [{
+            label: "Covid 19 Stats",
+            data: Object.values(totalStats),
+            backgroundColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+            ],
+            borderColor: [
+                "rgba(255, 99, 132, 1)",
+                "rgba(54, 162, 235, 1)",
+                "rgba(255, 206, 86, 1)",
+            ],
+            borderWidth: 1
+        }]
     },
   });
 }
