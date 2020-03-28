@@ -11,3 +11,7 @@ button {
     height: 100%;
     width: auto;
 }
+
+.navbar.is-primary {
+    background-color: #408090;
+}

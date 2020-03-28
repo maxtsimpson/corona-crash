@@ -80,22 +80,77 @@ let mapStockChartToChartObject = function(stockChartAjaxResponse) {
 
     //now you have a stockChartObject that you can use to load the chart. the console log below shows the format of it
     console.log({stockChartObject});
+    return stockChartObject;
 }
 
 
-let getStockChart = function(stockSymbol) {
+let getStockChart = async function(stockSymbol) {
     var queryURL = "https://cloud.iexapis.com/stable/stock/" + stockSymbol + "/chart?"
     + "&token=" + ALTIEXCLOUDKEY;
-    $.ajax({
+    return $.ajax({
         url: queryURL,
         method: "GET"
-    }).then(mapStockChartToChartObject);
+    })
 }
 
+let createStockGraph = function(canvasId,stockChartObject,stockSymbol){
+  console.log({canvasId});
+  console.log({stockChartObject});
+  var ctx = document.getElementById(canvasId).getContext('2d');
+  var stockGraph = new Chart(ctx, {
+  type: 'line',
+  data: {
+      labels: Object.keys(stockChartObject),
+      datasets: [{
+          label: stockSymbol,
+          data: Object.values(stockChartObject),
+          backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+          ],
+          borderColor: [
+              'rgba(255, 99, 132, 1)',
+          ],
+          borderWidth: 1
+          }]
+      },
+  });
+}
+
+let renderStockChart = async function(stockSymbol,index){
+  let apiStockChart = await getStockChart(stockSymbol);
+  stockChartObject = mapStockChartToChartObject(apiStockChart);
+  var canvasId ="";
+  console.log({index})
+  switch (String(index)) {
+    case "1":
+        canvasId = "first-gain-chart";
+      break;
+    case "2":
+        canvasId = "second-gain-chart";
+      break;
+    case "3":
+        canvasId = "third-gain-chart";
+      break;
+    case "-1":
+        canvasId = "first-loss-chart";
+      break;
+    case "-2":
+        canvasId = "second-loss-chart";
+      break;
+    case "-3":
+        canvasId = "third-loss-chart";
+      break;
+    default:
+      break;
+  }
+  createStockGraph(canvasId,stockChartObject,stockSymbol);
+}
 
 let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
     console.log({gainersAjaxResponse});
     
+    //.then(mapStockChartToChartObject);
+
     var stockGainArray = [];
 
     for (var index = 0; index < 3; index++) {
@@ -104,8 +159,10 @@ let mapGainersAjaxResponseToStockGainArray = function(gainersAjaxResponse){
     }
     console.log({stockGainArray});
 
+    index = 1;
     stockGainArray.forEach(stock => {
-        getStockChart(stock);
+        renderStockChart(stock,index);
+        index++;
     });
 }
 
@@ -189,8 +246,15 @@ let populateCountryDropDown = function(){
 
 let populateCurrencyData = function(country){
     var fromCurrencySymbol = countryToDollarMap[country];
+    var toCurrencySymbol;
     //hardcoded for now
-    var toCurrencySymbol = "USD"
+    if (fromCurrencySymbol !== "USD")
+    {
+      toCurrencySymbol = "USD"
+    } else {
+      toCurrencySymbol = "EUR"
+    }
+
     callCurrencyApi(fromCurrencySymbol,toCurrencySymbol);
 }
 
@@ -204,9 +268,19 @@ let searchCountryStats = function(){
     //populate the currency data
     populateCurrencyData(selectedCountry);
     //populate the corona virus data
-
+    getVirusStatsByCountry(selectedCountry);
     //populate the stock data
+    populateStockDataByCountry(selectedCountry);
 
+}
+
+let populateStockDataByCountry = function(country){
+  //so far hard code the country to the US because that's what's working
+  if (country === "United States of America") {
+    getTopGainersFromAjax();
+    getTopLosersFromAjax();
+  }
+  
 }
 
 let OnInit = function(){
@@ -236,11 +310,9 @@ let buildGainURL = function() {
     return queryURL + $.param(queryParams)
 }
 
-var url = buildGainURL();
-
 let getTopGainersFromAjax = function() {
     $.ajax({
-        url: url,
+        url: buildGainURL(),
         method: "GET"
       }).then(mapGainersAjaxResponseToStockGainArray);
 }
@@ -255,11 +327,9 @@ let buildLoseURL = function() {
   return queryURL + $.param(queryParams)
 }
 
-var url = buildLoseURL();
-
 let getTopLosersFromAjax = function() {
     $.ajax({
-        url: url,
+        url: buildLoseURL(),
         method: "GET"
       }).then(mapLosersAjaxResponseToStockloserArray);
 }
@@ -274,7 +344,9 @@ let mapLosersAjaxResponseToStockloserArray = function(losersAjaxResponse){
   }
   console.log({stockLoseArray});
 
+  index = -1;
   stockLoseArray.forEach(stock => {
-      getStockChart(stock);
+      renderStockChart(stock,index);
+      index--;
   });
 }
