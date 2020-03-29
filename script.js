@@ -13,22 +13,24 @@ var countryToDollarMap = {
   "United States of America": "USD"
 };
 
-let mapApiToVirusObject = function (ajaxResponse) {
-  var totalInfected = 0;
-  var totalRecovered = 0;
-  var totalDeaths = 0;
-  ajaxResponse.data.covid19Stats.forEach(location => {
-    totalInfected += location.confirmed;
-    totalRecovered += location.recovered;
-    totalDeaths += location.deaths;
-  });
+let mapApiToVirusObject = function(ajaxResponse){
+    var totalInfected = 0;
+    var totalRecovered = 0;
+    var totalDeaths = 0;
+        ajaxResponse.data.covid19Stats.forEach(location => {
+            totalInfected += location.confirmed;
+            totalRecovered += location.recovered;
+            totalDeaths += location.deaths;
+        });
 
-  var totalStats = {
-    infected: totalInfected,
-    recovered: totalRecovered,
-    deaths: totalDeaths
-  }
-  createVirusPieChart(totalStats);
+        var totalStats = {
+            Infected: totalInfected,
+            Recovered: totalRecovered,
+            Deaths: totalDeaths
+        }
+        createVirusPieChart(totalStats);
+        createVirusStats(totalStats);
+        $("#virus-stats").removeClass("hide");
 };
 
 let getVirusStatsByCountry = function (country) {
@@ -43,16 +45,17 @@ let getVirusStatsByCountry = function (country) {
     }
   }
   $.ajax(settings).done(mapApiToVirusObject);
-}
+};
+
 
 var virusChart;
-var createVirusPieChart = function (totalStats) {
-  if (typeof (virusChart) === "object") {
+var createVirusPieChart = function(totalStats) {
+  if (typeof(virusChart) === "object") {
     //if virusChart has been defined, which should only be true if it's already been rendered. otherwise it will be "undefined"
     virusChart.destroy()
-  }
+  }  
   var ctx = document.getElementById("virus-pie-chart").getContext("2d");
-  virusChart = new Chart(ctx, {
+    virusChart = new Chart(ctx, {
     type: "pie",
     data: {
       labels: Object.keys(totalStats),
@@ -77,9 +80,13 @@ var createVirusPieChart = function (totalStats) {
   console.log(typeof (virusChart));
 }
 
-let mapUsStockChartToChartObject = function (stockChartAjaxResponse) {
+var createVirusStats = function(totalStats){
+    $("#infected").text(totalStats.Infected);
+    $("#recovered").text(totalStats.Recovered);
+    $("#deaths").text(totalStats.Deaths);
+}
 
-  console.log({ stockChartAjaxResponse });
+let mapUsStockChartToChartObject = function (stockChartAjaxResponse) {
 
   //define a local object to store the dates and prices
   var stockChartObject = {};
@@ -89,13 +96,11 @@ let mapUsStockChartToChartObject = function (stockChartAjaxResponse) {
   });
 
   //now you have a stockChartObject that you can use to load the chart. the console log below shows the format of it
-  console.log({ stockChartObject });
   return stockChartObject;
 }
 
 let mapAusStockChartToChartObject = function (stockChartAjaxResponse) {
-  console.log({ stockChartAjaxResponse });
-
+  
   //define a local object to store the dates and prices
   var stockChartObject = {};
 
@@ -106,7 +111,6 @@ let mapAusStockChartToChartObject = function (stockChartAjaxResponse) {
   }
 
   //now you have a stockChartObject that you can use to load the chart. the console log below shows the format of it
-  console.log({ stockChartObject });
   return stockChartObject;
 
 }
