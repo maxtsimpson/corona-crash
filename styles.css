@@ -2,6 +2,47 @@
     display: none;
 }
 
+#my-navbar {
+    height: 5%;
+    padding-bottom: 20px;
+    background-color: rgb(6, 66, 69);
+}
+
+#title {
+    padding: 0 1em 0 1em;
+    font-family: 'Exo 2', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.2rem;
+    color: rgb(219, 219, 219);
+    
+}
+
+#header-img {
+    width: 60px;
+    margin-right: 4vh;
+    transform: scaleX(-1);
+}
+
+#myHeader {
+    font-family: 'Exo 2', sans-serif;
+    font-size: 3rem;
+    letter-spacing: 2rem;
+    padding-bottom: 5px;
+}
+
+#column-control {
+    padding-bottom: 30px;
+}
+
+#myHeaderSub {
+    letter-spacing: 0.2rem;
+}
+
+#Stockletter, #Currencyletter {
+    font-family: 'Exo 2', sans-serif;
+    letter-spacing: 0.5rem;
+}
+
 .column{
     padding: 2em;
 }
@@ -16,6 +57,17 @@ button {
     width: auto;
 }
 
+#search-location-button {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-top-right-radius: 7px;
+    border-bottom-right-radius: 7px;
+}
+
+#select-country {
+    width: 25em;
+    height: 2.5em;
+}
 
 #infected,
 #deaths,
@@ -44,7 +96,7 @@ button {
 #deaths {
     color: rgba(255, 206, 86, 1);
 }
-=======
+
 .navbar.is-primary {
     background-color: #408090;
 }

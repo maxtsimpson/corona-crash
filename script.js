@@ -31,6 +31,18 @@ let mapApiToVirusObject = function(ajaxResponse){
         createVirusPieChart(totalStats);
         createVirusStats(totalStats);
         $("#virus-stats").removeClass("hide");
+        $("#stockgain").removeClass("hide");
+        $("#stocklose").removeClass("hide");
+        $("#my-currency").removeClass("hide");
+        $("#covid-19-title").removeClass("hide");
+        $("#first-gain-chart").removeClass("hide");
+        $("#second-gain-chart").removeClass("hide");
+        $("#third-gain-chart").removeClass("hide");
+        $("#first-loss-chart").removeClass("hide");
+        $("#second-loss-chart").removeClass("hide");
+        $("#third-loss-chart").removeClass("hide"); 
+
+
 };
 
 let getVirusStatsByCountry = function (country) {
