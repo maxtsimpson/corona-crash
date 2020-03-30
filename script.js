@@ -355,8 +355,8 @@ let populateStockDataByCountry = function (country) {
   }
 
   //hardcoded for aus because havent been able to find biggest gainers and losers for aus
-  gainersArray = ['CEN', 'ALQ', 'WTC'] //got this from website https://finance.yahoo.com/gainers/ just edit to select AUS
-  losersArray = ['SCG', 'GPT', 'GMG'] //got this from website https://finance.yahoo.com/losers/ just edit to select AUS
+  gainersArray = ['ANN', 'WHC', 'NXT'] //got this from website https://finance.yahoo.com/gainers/ just edit to select AUS
+  losersArray = ['AGG', 'APT', 'AIA'] //got this from website https://finance.yahoo.com/losers/ just edit to select AUS
   if (country === "Australia") {
     postTopGainers(gainersArray);
     postTopLosers(losersArray);
