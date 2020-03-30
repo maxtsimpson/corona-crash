@@ -1,6 +1,7 @@
 # coronaCrash
 a project to view the impact of the corona virus on stock markets around the world
 
+https://maxtsimpson.github.io/coronaCrash/index
 
 # USER STORIES
 GIVEN i am an investor 
