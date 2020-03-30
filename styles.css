@@ -44,8 +44,9 @@ button {
 #deaths {
     color: rgba(255, 206, 86, 1);
 }
-=======
+
 .navbar.is-primary {
     background-color: #408090;
+    border-radius: 0%;
 }
 
