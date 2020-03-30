@@ -1,6 +1,6 @@
 const ALPHAVANTAGEKEY = "IXMGIC5PG1TECNCZ"
 const IEXClOUDKEY = "pk_52d0f60a5213467ba11ea8c961508026"
-const ALTIEXCLOUDKEY = "pk_c314d3eadf7b46149d92dde9913bb352";
+const ALTIEXCLOUDKEY = "pk_1886f90b66304668afc7083a8837a613";
 const FINNHUBKEY = "bpvjtm7rh5rf9gg9uf3g" //https://finnhub.io/dashboard
 const WORLDTRADINGDATAKEY = "aPnV6nDaV0txuTwfpqsKwY1USvqeoqySWaxeawCCmXfwogtEJTbfT6jPYK5M" //https://www.worldtradingdata.com/members/home
 
